@@ -1,0 +1,27 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# Logs and local DB
+*.log
+*.sqlite3
+
+# IDE settings
+.vscode/
+.idea/
+
+# Django specific
+*.sqlite3
+/staticfiles/
+media/
+
+# MacOS
+.DS_Store

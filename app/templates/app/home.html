@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Resume Uploader</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container mt-5">
+     <div class="text-center text-white py-3 mb-4" style="background-color: #ff69b4;">
+  <h1 class="mb-0">Resume Uploader</h1>
+</div>
+
+      <div class="d-flex justify-content-between">
+        <!-- Resume Form -->
+        <div class="card shadow w-50 mr-3">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0 text-center">Candidate Details</h5>
+          </div>
+          <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                <small class="text-danger">{{ form.name.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.dob.label_tag }}
+                {{ form.dob }}
+                <small class="text-danger">{{ form.dob.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.gender.label_tag }}<br>
+                {% for radio in form.gender %}
+                  <div class="form-check form-check-inline">
+                    {{ radio.tag }}
+                    {{ radio.choice_label }}
+                  </div>
+                {% endfor %}
+                <small class="text-danger">{{ form.gender.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.locality.label_tag }}
+                {{ form.locality }}
+                <small class="text-danger">{{ form.locality.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.city.label_tag }}
+                {{ form.city }}
+                <small class="text-danger">{{ form.city.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.pin.label_tag }}
+                {{ form.pin }}
+                <small class="text-danger">{{ form.pin.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.state.label_tag }}
+                {{ form.state }}
+                <small class="text-danger">{{ form.state.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.mobile.label_tag }}
+                {{ form.mobile }}
+                <small class="text-danger">{{ form.mobile.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                <small class="text-danger">{{ form.email.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.job_city.label_tag }}<br>
+                {% for checkbox in form.job_city %}
+                  <div class="form-check form-check-inline">
+                    {{ checkbox.tag }}
+                    {{ checkbox.choice_label }}
+                  </div>
+                {% endfor %}
+                <small class="text-danger">{{ form.job_city.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.profile_image.label_tag }}
+                {{ form.profile_image }}
+                <small class="text-danger">{{ form.profile_image.errors|striptags }}</small>
+              </div>
+
+              <div class="form-group">
+                {{ form.my_file.label_tag }}
+                {{ form.my_file }}
+                <small class="text-danger">{{ form.my_file.errors|striptags }}</small>
+              </div>
+
+              <button type="submit" class="btn btn-success">Submit</button>
+
+              {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger mt-3">{{ error }}</div>
+                {% endfor %}
+              {% endif %}
+            </form>
+          </div>
+        </div>
+
+        <!-- List of Candidates (placeholder for now) -->
+<div class="w-50">
+          <h4 class="text-center mb-3"><u>List Of Candidates</u></h4>
+
+          {% for candidate in candidates %}
+            <div class="mb-2">
+              <strong>{{ candidate.id }}</strong>:
+              <a href="{% url 'candidate' candidate.id %}">
+                {{ candidate.name }}
+              </a>
+              <hr>
+            </div>
+          {% empty %}
+            <p>No candidates uploaded yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>
